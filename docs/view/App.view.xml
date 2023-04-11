@@ -8,6 +8,6 @@
 		id="flexibleColumnLayout"
 		stateChange=".onStateChanged"
 		backgroundDesign="Solid"
-		layout="ThreeColumnsMidExpanded"
+		layout="{receipts>/layout}"
 	/>
 </mvc:View>

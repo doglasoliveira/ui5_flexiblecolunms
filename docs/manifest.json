@@ -87,7 +87,7 @@
           ]
         },
 				{
-					"pattern": "detail/{receiptId}",
+					"pattern": "detail/{receiptId}/{layout}",
 					"name": "detail",
 					"target": [
 						"master",
@@ -95,7 +95,7 @@
 					]
 				},
 				{
-					"pattern": "detail/{receiptId}/deepdetail",
+					"pattern": "detail/{receiptId}/deepdetail/{layout}",
 					"name": "deepdetail",
 					"target": [
 						"master",

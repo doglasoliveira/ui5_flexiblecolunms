@@ -15,7 +15,10 @@ sap.ui.define(
       },
 
       _onProductMatched: function (oEvent) {
+        const oReceiptsModel = this.getOwnerComponent().getModel("receipts");
         this._receipt = oEvent.getParameter("arguments").receiptId || this._receipt || "0";
+        this._layout = oEvent.getParameter("arguments").layout;
+        oReceiptsModel.setProperty("/layout", this._layout);
         this.onNavToAttach(this._receipt);
       },
 

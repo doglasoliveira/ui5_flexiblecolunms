@@ -50,5 +50,6 @@
             "archivingStatus": "Archived",
             "reviewStatus": "To Review"
         }
-    ]
+    ],
+    "layout": "OneColumn"
 }

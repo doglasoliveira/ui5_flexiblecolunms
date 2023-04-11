@@ -19,7 +19,8 @@ sap.ui.define([
 
             onPressNextRout: function (oEvent) {
                 this._receipt = oEvent.getSource().getBindingContext("receipts").getObject().receiptId || this._receipt || "0";
-                this.oRouter.navTo("detail", { receiptId: this._receipt });
+                this.getView().getModel().setProperty("/layout", "TwoColumnsMidExpanded")
+                this.oRouter.navTo("detail", { receiptId: this._receipt, layout: "TwoColumnsMidExpanded" });
             }
         });
     });
