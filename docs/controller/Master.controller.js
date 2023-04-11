@@ -25,7 +25,7 @@ sap.ui.define([
                 this.oRouter.navTo("detail", { receiptId: this._receipt, layout: "TwoColumnsMidExpanded" });
             },
 
-            andleUploadComplete: function(oEvent) {
+            handleUploadComplete: function(oEvent) {
                 var sResponse = oEvent.getParameter("response"),
                     iHttpStatusCode = parseInt(/\d{3}/.exec(sResponse)[0]),
                     sMessage;
