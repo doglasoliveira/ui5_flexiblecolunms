@@ -1,0 +1,86 @@
+<mvc:View
+	controllerName="com.vesi.zfafidgtrcpt.controller.Detail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<f:DynamicPage showFooter="true">
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+				<Toolbar style="Clear">
+					<Title
+						text="Informations Validation"
+						titleStyle="H5"/>
+					<ToolbarSpacer/>
+					<Button text="Delete" type="Reject"/>
+				</Toolbar>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<form:SimpleForm
+				id="SimpleFormReceipts"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				labelSpanXL="4"
+				labelSpanL="4"
+				labelSpanM="12"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="0"
+				emptySpanL="0"
+				emptySpanM="0"
+				emptySpanS="0"
+				columnsXL="2"
+				columnsL="2"
+				columnsM="1"
+				singleContainerFullSize="false">
+				<form:content>
+					<core:Title text=""/>
+					<Label text="Exepense type"/>
+					<Select
+						id="exptyp"
+						selectedKey="{Country}">
+						<items>
+							<core:Item
+								text="Indicivual Transport"
+								key="IndTrans"/>
+						</items>
+					</Select>
+					<core:Title text="Main Informations"/>
+					<Label text="Receipts Title"/>
+					<Input
+						value=""
+						type="Url"/>
+					<Label text="Amount"/>
+					<Input value="{Twitter}"/>
+					<Label text="Currency"/>
+					<Input value="{Twitter}"/>
+					<Label text="Expense Date"/>
+					<Input value="{Twitter}"/>
+					<Label text="Location"/>
+					<Input value="{Twitter}"/>
+					<core:Title text="Aditional Informations"/>
+					<Label text="Business Purpose"/>
+					<Input value="{Twitter}"/>
+					<Label text="Description"/>
+					<Input value="{Twitter}"/>
+				</form:content>
+			</form:SimpleForm>
+		</f:content>
+		<f:footer>
+			<Toolbar
+				asyncMode="false"
+				design="Transparent">
+				<ToolbarSpacer/>
+				<Button
+					text="Save"
+					type="Accept"
+					press="onNavToAttach"/>
+				<Button
+					text="Close Attachment"
+					type="Reject"/>
+			</Toolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

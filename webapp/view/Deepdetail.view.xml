@@ -1,0 +1,22 @@
+<mvc:View
+	controllerName="com.vesi.zfafidgtrcpt.controller.Deepdetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+>
+	<f:DynamicPage >
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+			<Toolbar style="Clear">
+				<Title text="Attachment"/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://full-screen"/>
+				<Button icon="sap-icon://decline"/>
+			</Toolbar>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<Image src="../../../mockdata/attach_receipt.png"/>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

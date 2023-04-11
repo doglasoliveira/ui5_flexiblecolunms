@@ -1,0 +1,54 @@
+{
+    "ReceiptsCollection": [
+        {
+            "receiptId":"RC001",
+            "expenseType": "Restaurant",
+            "receiptTitle": "Hanita Sushi",
+            "amount": 93.30,
+            "currency": "EUR",
+            "expenseDate": "09.02.2023",
+            "location": "12 rue Belmont 75012",
+            "numberEmployees": "3",
+            "businessPurpose": "",
+            "description": "",
+            "comment": "",
+            "documentLink": "",
+            "ocrStatus": "Extracted",
+            "archivingStatus": "Archived",
+            "reviewStatus": "In Progress"
+        },
+        {
+            "receiptId":"RC002",
+            "expenseType": "Transport",
+            "receiptTitle": "Uber",
+            "amount": 170.00,
+            "currency": "EUR",
+            "expenseDate": "09.02.2023",
+            "location": "12 rue Belmont 75012",
+            "numberEmployees": "3",
+            "businessPurpose": "",
+            "description": "",
+            "comment": "",
+            "documentLink": "",
+            "ocrStatus": "Extracted",
+            "archivingStatus": "Archived",
+            "reviewStatus": "Review OK"
+        },{
+            "receiptId":"RC003",
+            "expenseType": "Transport",
+            "receiptTitle": "Taxi",
+            "amount": 1200.67,
+            "currency": "EUR",
+            "expenseDate": "09.02.2023",
+            "location": "12 rue Belmont 75012",
+            "numberEmployees": "3",
+            "businessPurpose": "",
+            "description": "",
+            "comment": "",
+            "documentLink": "",
+            "ocrStatus": "Extracted",
+            "archivingStatus": "Archived",
+            "reviewStatus": "To Review"
+        }
+    ]
+}

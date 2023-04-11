@@ -1,0 +1,129 @@
+{
+  "_version": "1.49.0",
+  "sap.app": {
+    "id": "com.vesi.zfafidgtrcpt",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.9.3",
+      "toolsId": "7627ebee-013e-4ec4-8454-be51bd7a93c9"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "fullWidth": true,
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.111.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.vesi.zfafidgtrcpt.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "type":"View",
+        "async": true,
+        "viewPath": "com.vesi.zfafidgtrcpt.view",
+        "controlId": "flexibleColumnLayout",
+        "transition": "slide"
+      },
+      "routes": [
+        {
+          "name": "master",
+          "pattern": ":layout:",
+          "target": [
+            "master",
+            "detail"
+          ]
+        },
+				{
+					"pattern": "detail/{receiptId}",
+					"name": "detail",
+					"target": [
+						"master",
+						"detail"
+					]
+				},
+				{
+					"pattern": "detail/{receiptId}/deepdetail",
+					"name": "deepdetail",
+					"target": [
+						"master",
+						"detail",
+            "deepdetail"
+					]
+				}
+      ],
+      "targets": {
+        "master": {
+          "viewName": "Master",
+          "controlAggregation": "beginColumnPages"
+        },
+        "detail": {
+          "viewName": "Detail",
+          "controlAggregation": "midColumnPages"
+        },
+        "deepdetail": {
+          "viewName": "Deepdetail",
+          "controlAggregation": "endColumnPages"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.vesi.zfafidgtrcpt.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

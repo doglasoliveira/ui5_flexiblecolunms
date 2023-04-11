@@ -1,0 +1,13 @@
+<mvc:View controllerName="com.vesi.zfafidgtrcpt.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.f"
+	height="100%"
+>
+	<FlexibleColumnLayout
+		id="flexibleColumnLayout"
+		stateChange=".onStateChanged"
+		backgroundDesign="Solid"
+		layout="ThreeColumnsMidExpanded"
+	/>
+</mvc:View>

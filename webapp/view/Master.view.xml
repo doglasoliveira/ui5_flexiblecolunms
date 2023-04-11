@@ -1,0 +1,156 @@
+<mvc:View
+	controllerName="com.vesi.zfafidgtrcpt.controller.Master"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f">
+	<f:DynamicPage showFooter="true">
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+				<Toolbar style="Clear">
+					<Title
+						text="My Digital Receipts"
+						titleStyle="H5"/>
+					<ToolbarSpacer/>
+					<Link text="{
+						path: '',
+						formatter: '.formatter.formatTotalAmountReceipts'
+					}"/>
+				</Toolbar>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<VBox>
+				<SearchField/>
+				<Table
+					id="receiptsTable"
+					items="{receipts>/ReceiptsCollection}"
+					popinLayout="GridSmall">
+					<headerToolbar>
+						<OverflowToolbar>
+							<SegmentedButton>
+								<items>
+									<SegmentedButtonItem
+										key="srcAll"
+										text="All(1)"/>
+									<SegmentedButtonItem
+										key="toReview"
+										text="To Review(1)"/>
+								</items>
+							</SegmentedButton>
+							<ToolbarSpacer/>
+							<!-- Add the Delete button -->
+							<Button icon="sap-icon://delete">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</Button>
+							<ToolbarSeparator/>
+							<!-- Add the Sort button -->
+							<Button icon="sap-icon://sort-ascending">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</Button>
+							<!-- Add the Filter button -->
+							<Button icon="sap-icon://filter">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</Button>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="Receipt title"/>
+						</Column>
+						<Column>
+							<Text text="Amount"/>
+						</Column>
+						<Column
+							demandPopin="true"
+							minScreenWidth="Desktop"
+							popinDisplay="Inline">
+							<Text text="Expense Type"/>
+						</Column>
+						<Column
+							demandPopin="true"
+							minScreenWidth="Desktop"
+							popinDisplay="Inline">
+							<Text text="Location"/>
+						</Column>
+						<Column
+							demandPopin="true"
+							minScreenWidth="Desktop"
+							popinDisplay="Inline">
+							<Text text="Document"/>
+						</Column>
+						<Column
+							demandPopin="true"
+							minScreenWidth="Desktop"
+							popinDisplay="Inline">
+							<Text text="Expense Date"/>
+						</Column>
+						<Column
+							demandPopin="true"
+							minScreenWidth="Desktop"
+							popinDisplay="Inline">
+							<Text text="OCR Status"/>
+						</Column>
+						<Column
+							demandPopin="true"
+							minScreenWidth="Desktop"
+							popinDisplay="Inline">
+							<Text text="Archiving status"/>
+						</Column>
+						<Column
+							demandPopin="true"
+							minScreenWidth="Desktop"
+							popinDisplay="Inline">
+							<Text text="Review status"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem
+							highlight="{
+								path: 'receipts>reviewStatus',
+								formatter: '.formatter.formatStatusReceipts'
+							}"
+							type="Navigation"
+							press="onPressNextRout">
+							<cells>
+								<Title text="{receipts>receiptTitle}"/>
+								<Title text="{path: 'receipts>amount', formatter: '.formatter.formatFloatString'} {receipts>currency}"/>
+								<Text text="{receipts>expenseType}"/>
+								<Text text="{receipts>location}"/>
+								<Link text="{receipts>documentLink}"/>
+								<Text text="{receipts>expenseDate}"/>
+								<ObjectStatus
+									text="{receipts>ocrStatus}"
+									state="Success"/>
+								<ObjectStatus
+									text="{receipts>archivingStatus}"
+									state="Success"/>
+								<ObjectStatus
+									text="{receipts>reviewStatus}"
+									state="Warning"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</f:content>
+		<f:footer>
+			<Toolbar
+				asyncMode="false"
+				design="Transparent">
+				<ToolbarSpacer/>
+				<Button
+					text="Digitalise Receipts"
+					type="Emphasized"/>
+				<Button
+					text="Create Expense"
+					type="Transparent"/>
+			</Toolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>
