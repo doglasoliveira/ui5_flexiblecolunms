@@ -144,12 +144,6 @@
 			<Toolbar
 				design="Transparent">
 				<ToolbarSpacer/>
-				<!--<Button
-					text="Digitalise Receipts"
-					type="Emphasized"/>
-				<Button
-					text="Create Expense"
-					type="Transparent"/>-->
 					<u:FileUploader
                         id="fileUploaderPhoto"
                         buttonText="Digitalise Receipts"
@@ -158,6 +152,10 @@
                         uploadComplete="handleUploadComplete"
 						style="Emphasized"
 						/>
+					<Button
+						text="Create Expense"
+						type="Transparent"
+						visible="false"/>
 			</Toolbar>
 		</f:footer>
 	</f:DynamicPage>
