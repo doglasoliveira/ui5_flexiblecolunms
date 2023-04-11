@@ -2,7 +2,8 @@
 	controllerName="com.vesi.zfafidgtrcpt.controller.Master"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
-	xmlns:f="sap.f">
+	xmlns:f="sap.f"
+	xmlns:u="sap.ui.unified">
 	<f:DynamicPage showFooter="true">
 		<f:header>
 			<f:DynamicPageHeader pinnable="false">
@@ -141,15 +142,20 @@
 		</f:content>
 		<f:footer>
 			<Toolbar
-				asyncMode="false"
 				design="Transparent">
 				<ToolbarSpacer/>
-				<Button
+				<!--<Button
 					text="Digitalise Receipts"
 					type="Emphasized"/>
 				<Button
 					text="Create Expense"
-					type="Transparent"/>
+					type="Transparent"/>-->
+					<u:FileUploader
+                        id="fileUploaderPhoto"
+                        buttonText="Take a Photo"
+                        uploadUrl="upload/"
+                        buttonOnly="true"
+                        uploadComplete="handleUploadComplete"/>
 			</Toolbar>
 		</f:footer>
 	</f:DynamicPage>
