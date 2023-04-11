@@ -1,14 +1,16 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/f/LayoutType",
-    "com/vesi/zfafidgtrcpt/model/formatter"
+    "com/vesi/zfafidgtrcpt/model/formatter",
+    "sap/m/MessageToast'"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
         LayoutType,
-        formatter) {
+        formatter,
+        MessageToast) {
         "use strict";
 
         return Controller.extend("com.vesi.zfafidgtrcpt.controller.Master", {
