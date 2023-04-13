@@ -31,8 +31,7 @@
 			<VBox>
 				<Carousel
 					id="previewImage"
-					loop="true"
-					showPageIndicator="false"/>
+					loop="true"/>
 			</VBox>
 		</f:content>
 		<f:footer>
