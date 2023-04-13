@@ -33,7 +33,7 @@
 					id="previewImage"
 					loop="true"
 					arrowsPlacement="PageIndicator"
-					pageIndicatorPlacement="VerticalPreferedTop"/>
+					pageIndicatorPlacement="Auto"/>
 			</VBox>
 		</f:content>
 		<f:footer>
