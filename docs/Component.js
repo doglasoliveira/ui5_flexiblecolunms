@@ -20,7 +20,8 @@ sap.ui.define([
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
 
-                sap.ui.getCore().applyTheme("sap_fiori_3")
+                //Chenge theme
+                //sap.ui.getCore().applyTheme("sap_fiori_3")
 
                 const oModel = new JSONModel();
                 this.setModel(oModel);
