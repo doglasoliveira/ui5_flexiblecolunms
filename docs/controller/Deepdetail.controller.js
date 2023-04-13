@@ -13,6 +13,7 @@ sap.ui.define([
             this.oRouter = this.getOwnerComponent().getRouter();
 
             this.oRouter.getRoute("deepdetail").attachPatternMatched(this._onProductMatched, this);
+            this.oRouter.getRoute("receiptConfig").attachPatternMatched(this._onProductMatched, this);
         },
 
         _onProductMatched: function (oEvent) {

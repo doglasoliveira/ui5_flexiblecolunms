@@ -24,7 +24,7 @@
 				<SearchField/>
 				<Table
 					id="receiptsTable"
-					items="{receipts>/ReceiptsCollection}"
+					items="{oViewMaster>/ReceiptsCollection}"
 					popinLayout="GridSmall">
 					<headerToolbar>
 						<OverflowToolbar>
@@ -32,10 +32,10 @@
 								<items>
 									<SegmentedButtonItem
 										key="srcAll"
-										text="All(1)"/>
+										text="All(?)"/>
 									<SegmentedButtonItem
 										key="toReview"
-										text="To Review(1)"/>
+										text="To Review(?)"/>
 								</items>
 							</SegmentedButton>
 							<ToolbarSpacer/>
@@ -120,7 +120,10 @@
 							press="onPressNextRout">
 							<cells>
 								<Title text="{receipts>receiptTitle}"/>
-								<Title text="{path: 'receipts>amount', formatter: '.formatter.formatFloatString'} {receipts>currency}"/>
+								<Title text="{
+									path: 'receipts>amount',
+									formatter: '.formatter.formatFloatString'
+								} {receipts>currency}"/>
 								<Text text="{receipts>expenseType}"/>
 								<Text text="{receipts>location}"/>
 								<Link text="{receipts>documentLink}"/>
@@ -137,25 +140,37 @@
 							</cells>
 						</ColumnListItem>
 					</items>
+					<noData>
+						<IllustratedMessage
+							enableVerticalResponsiveness="true"
+							illustrationSize="Scene"
+							illustrationType="sapIllus-NoData"
+							enableDefaultTitleAndDescription="false"
+							title="There's no digital receipts"
+							description="Start to digitalise a receipt.">
+						</IllustratedMessage>
+					</noData>
 				</Table>
 			</VBox>
 		</f:content>
 		<f:footer>
 			<Toolbar
+				asyncMode="false"
 				design="Transparent">
 				<ToolbarSpacer/>
-					<u:FileUploader
-                        id="fileUploaderPhoto"
-                        buttonText="Digitalise Receipts"
-                        uploadUrl="upload/"
-                        buttonOnly="true"
-                        uploadComplete="handleUploadComplete"
-						style="Emphasized"
-						/>
-					<Button
-						text="Create Expense"
-						type="Transparent"
-						visible="false"/>
+				<u:FileUploader
+					id="fileUploaderPhoto"
+					buttonText="Digitalise Receipts"
+					uploadUrl="upload/"
+					buttonOnly="true"
+					uploadComplete="handleUploadComplete"
+					style="Emphasized"
+					change="onSelecFile"
+					sameFilenameAllowed="true"/>
+				<Button
+					text="Create Expense"
+					type="Transparent"
+					visible="false"/>
 			</Toolbar>
 		</f:footer>
 	</f:DynamicPage>

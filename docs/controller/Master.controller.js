@@ -2,20 +2,30 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/f/LayoutType",
     "com/vesi/zfafidgtrcpt/model/formatter",
-    "sap/m/MessageToast"
+    "sap/ui/core/Fragment",
+    "sap/ui/model/json/JSONModel",
+    "sap/m/Image",
+    "sap/m/ImageMode"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
-        LayoutType,
-        formatter,
-        MessageToast) {
+	LayoutType,
+	formatter,
+	Fragment,
+	JSONModel,
+	Image,
+	ImageMode) {
         "use strict";
 
         return Controller.extend("com.vesi.zfafidgtrcpt.controller.Master", {
             formatter: formatter,
             onInit: function () {
+                const oModel = new JSONModel({
+                    ReceiptsCollection: []
+                });
+                this.getView().setModel(oModel, "oViewMaster")
                 this.oRouter = this.getOwnerComponent().getRouter();
             },
 
@@ -25,14 +35,19 @@ sap.ui.define([
                 this.oRouter.navTo("detail", { receiptId: this._receipt, layout: "TwoColumnsMidExpanded" });
             },
 
-            handleUploadComplete: function(oEvent) {
-                var sResponse = oEvent.getParameter("response"),
-                    iHttpStatusCode = parseInt(/\d{3}/.exec(sResponse)[0]),
-                    sMessage;
-    
-                if (sResponse) {
-                    sMessage = iHttpStatusCode === 200 ? sResponse + " (Upload Success)" : sResponse + " (Upload Error)";
-                    MessageToast.show(sMessage);
+            onSelecFile: function(oEvent) {
+                const oFileUpload = this.getView().byId("fileUploaderPhoto");
+                if (oEvent.getSource().oFileUpload.files.length > 0) {
+                    const file = oEvent.getSource().oFileUpload.files[0];
+                    let path = URL.createObjectURL(file);
+                    
+                    this.getView().getModel().setProperty("/firstPhotoPath", path);
+                    this.getView().getModel().setProperty("/firstPhotoTitle", oEvent.getSource().oFileUpload.title);
+
+                    oFileUpload.removeAllHeaderParameters();
+                    oFileUpload.removeAllParameters();
+
+                    this.oRouter.navTo("receiptConfig", { layout: "EndColumnFullScreen" });
                 }
             }
         });

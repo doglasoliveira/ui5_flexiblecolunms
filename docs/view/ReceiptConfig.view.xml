@@ -1,0 +1,61 @@
+<mvc:View
+	controllerName="com.vesi.zfafidgtrcpt.controller.ReceiptConfig"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:u="sap.ui.unified">
+	<f:DynamicPage showFooter="true">
+		<f:header>
+			<f:DynamicPageHeader pinnable="false" >
+				<Toolbar style="Clear" height="110%">
+					<VBox justifyContent="SpaceAround">
+						<Title
+							text="Receipt Configuration"
+							titleStyle="H5"/>
+						<Text text="Photo 1 of 1"/>
+					</VBox>
+					<ToolbarSpacer/>
+					<u:FileUploader
+						id="fileUploaderAddPhotoReceiptsConfig"
+						buttonText="+ Add Page"
+						uploadUrl="upload/"
+						buttonOnly="true"
+						uploadComplete="handleUploadComplete"
+						style="Ghost"
+						change="onSelecFile"
+						sameFilenameAllowed="true"/>
+				</Toolbar>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<VBox>
+				<Carousel
+					id="previewImage"
+					loop="true"
+					showPageIndicator="false"/>
+			</VBox>
+		</f:content>
+		<f:footer>
+			<Toolbar
+				asyncMode="false"
+				design="Transparent">
+				<ToolbarSpacer/>
+				<Button
+					text="Digitalise"
+					type="Emphasized"/>
+				<u:FileUploader
+					id="fileUploaderNewPhotoReceiptsConfig"
+					buttonText="+ New Receipt"
+					uploadUrl="upload/"
+					buttonOnly="true"
+					uploadComplete="handleUploadComplete"
+					style="Transparent"
+					change="onFileNewReceipt"/>
+				<Button
+					text="Cancel"
+					type="Transparent"
+					press="onCancelPhotoReceiptConfig"/>
+			</Toolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

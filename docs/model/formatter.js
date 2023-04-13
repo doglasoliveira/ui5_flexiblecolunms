@@ -18,18 +18,22 @@ sap.ui.define(function () {
         },
 
         formatTotalAmountReceipts: function () {
-            let oData = this.getView().getModel("receipts").getData();
-            let totalAmount= 0.00;
-            oData.ReceiptsCollection.map(item => {
-                totalAmount = (+totalAmount + item.amount).toFixed(2)
-            })
+            let oData = this.getView().getModel("oViewMaster").getData();
+            let totalAmount = 0.00;
 
-            totalAmount.toString();
+            if (oData.ReceiptsCollection.lenght > 0) {
+                oData.ReceiptsCollection.map(item => {
+                    totalAmount = (+totalAmount + item.amount).toFixed(2)
+                })
+                totalAmount.toString();
+            } else {
+                totalAmount = "0,00"
+            }
 
             return `Amount: ${totalAmount} EUR`
         },
 
-        formatFloatString: function(sValue){
+        formatFloatString: function (sValue) {
             return sValue.toFixed(2)
         }
     };

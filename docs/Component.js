@@ -35,8 +35,8 @@ sap.ui.define([
             },
 
             _onBeforeRouteMatched: function (oEvent) {
-                var oModel = this.getModel(),
-                    sLayout = oEvent.getParameters().arguments.layout;
+                var oModel = this.getModel("receipts"),
+                    sLayout = "ThreeColumnsMidExpanded";
 
                 // If there is no layout parameter, set a default layout (normally OneColumn)
                 if (!sLayout) {

@@ -102,6 +102,12 @@
 						"detail",
             "deepdetail"
 					]
+				},
+				{
+					"pattern": "receiptConfig/{layout}",
+					"name": "receiptConfig",
+					"target": "receiptConfig",
+					"layout": "EndColumnFullScreen"
 				}
       ],
       "targets": {
@@ -115,6 +121,10 @@
         },
         "deepdetail": {
           "viewName": "Deepdetail",
+          "controlAggregation": "endColumnPages"
+        },
+        "receiptConfig": {
+          "viewName": "ReceiptConfig",
           "controlAggregation": "endColumnPages"
         }
       }
