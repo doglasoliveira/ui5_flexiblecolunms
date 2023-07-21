@@ -1,0 +1,18 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core">      
+	<SearchField
+		id="srchMonthFilterList"
+		search="onSearchFilterList"
+		visible="{= ${oViewMaster>/filterByContext} === 'kFilterMonth'?true:false}"/>
+	<List
+		id="listFilterMonths"
+		items="{oViewMaster>/listFilterMonths}"
+		selectionChange="onSelectMonthFilter"
+		visible="{= ${oViewMaster>/filterByContext} === 'kFilterMonth'?true:false}"
+		mode="MultiSelect">
+		<StandardListItem
+			id="monthItemListId"
+			title="{oViewMaster>month}"/>
+	</List>
+</c:FragmentDefinition>

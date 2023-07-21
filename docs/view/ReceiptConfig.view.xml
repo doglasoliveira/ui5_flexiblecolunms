@@ -3,58 +3,84 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:f="sap.f"
-	xmlns:u="sap.ui.unified">
+	xmlns:u="sap.ui.unified"
+>
 	<f:DynamicPage showFooter="true">
 		<f:header>
-			<f:DynamicPageHeader pinnable="false" >
-				<Toolbar style="Clear" height="110%">
+			<f:DynamicPageHeader pinnable="false">
+				<Toolbar
+					style="Clear"
+					height="110%"
+				>
 					<VBox justifyContent="SpaceAround">
 						<Title
-							text="Receipt Configuration"
-							titleStyle="H5"/>
-						<Text text="Photo 1 of 1"/>
+							text="{i18n>reciptViewTitle}"
+							titleStyle="H5"
+						/>
+						<Text text="{i18n>reciptViewPhoto} {global>/gPhotoCountIndice} {i18n>reciptViewOf} {global>/gPhotoCount}"/>
 					</VBox>
 					<ToolbarSpacer/>
 					<u:FileUploader
 						id="fileUploaderAddPhotoReceiptsConfig"
-						buttonText="+ Add Page"
-						uploadUrl="upload/"
+						buttonText="{i18n>reciptViewButtonAddPage}"
+						uploadUrl="/ReceiptAttachments"
 						buttonOnly="true"
 						uploadComplete="handleUploadComplete"
 						style="Ghost"
 						change="onSelecFile"
-						sameFilenameAllowed="true"/>
+						sameFilenameAllowed="true"
+						visible="{oReceiptConfigView>/isImage}"
+					/>
 				</Toolbar>
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
-			<VBox>
+			<VBox height="100%">
 				<Carousel
 					id="previewImage"
-					loop="true"/>
+					showPageIndicator="false"
+					loop="true"
+					pageChanged="onPageChanged"
+					visible="{oReceiptConfigView>/isImage}"
+				/>
+				<PDFViewer
+					id="receiptPDFPreViewer"
+					source=""
+					title="{global>/ReceiptFileName}"
+					height="100%"
+					showDownloadButton="false"
+					displayType="Embedded"
+					visible="{= !${oReceiptConfigView>/isImage}}"
+				>
+					<layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+				</PDFViewer>
 			</VBox>
 		</f:content>
 		<f:footer>
-			<Toolbar
-				asyncMode="false"
-				design="Transparent">
+			<OverflowToolbar design="Transparent">
 				<ToolbarSpacer/>
 				<Button
-					text="Digitalise"
-					type="Emphasized"/>
-				<u:FileUploader
+					text="{i18n>reciptViewButtonDigitalise}"
+					type="Emphasized"
+					press="onOpenToSplit"
+				/>
+				<!-- <u:FileUploader
 					id="fileUploaderNewPhotoReceiptsConfig"
-					buttonText="+ New Receipt"
+					buttonText="{i18n>reciptViewButtonNewReceipt}"
 					uploadUrl="upload/"
 					buttonOnly="true"
 					uploadComplete="handleUploadComplete"
 					style="Transparent"
-					change="onFileNewReceipt"/>
+					change="onFileNewReceipt"
+				/> -->
 				<Button
-					text="Cancel"
+					text="{i18n>reciptViewButtonCancel}"
 					type="Transparent"
-					press="onCancelPhotoReceiptConfig"/>
-			</Toolbar>
+					press="onCancelPhotoReceiptConfig"
+				/>
+			</OverflowToolbar>
 		</f:footer>
 	</f:DynamicPage>
 </mvc:View>

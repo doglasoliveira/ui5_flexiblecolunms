@@ -3,57 +3,121 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:f="sap.f"
-	xmlns:u="sap.ui.unified">
-	<f:DynamicPage showFooter="true">
+	xmlns:u="sap.ui.unified"
+>
+	<f:DynamicPage
+		showFooter="true"
+		headerPinned="true"
+		headerExpanded="true"
+	>
 		<f:header>
-			<f:DynamicPageHeader pinnable="false">
+			<f:DynamicPageHeader pinnable="true">
 				<Toolbar style="Clear">
 					<Title
-						text="My Digital Receipts"
-						titleStyle="H5"/>
+						text="{i18n>masterViewTitle}"
+						titleStyle="H5"
+					/>
 					<ToolbarSpacer/>
-					<Link text="{
-						path: '',
-						formatter: '.formatter.formatTotalAmountReceipts'
-					}"/>
 				</Toolbar>
+				<VBox>
+					<SearchField
+						id="searchReciptsField"
+						search="onSearchRecipts"
+						liveChange="onSearchRecipts"
+					/>
+					<IconTabBar
+						headerBackgroundDesign="Transparent"
+						select="onSelectGrouping"
+						applyContentPadding="false"
+                        
+					>
+						<items>
+							<IconTabFilter
+								text="{i18n>masterViewTabFilterNoGroup}"
+								key="kNGroup"
+							/>
+							<IconTabFilter
+								text="{i18n>masterViewTabFilterByDate}"
+								key="kDate"
+							/>
+							<IconTabFilter
+								text="{i18n>masterViewTabFilterByExpensiveType}"
+								key="kExpType"
+							/>
+							<IconTabFilter
+								text="{i18n>masterViewTabFilterByOCRStatus}"
+								key="kOCRStatus"
+							/>
+							<IconTabFilter
+								text="{i18n>masterViewTabFilterByArchivingStatus}"
+								key="kArchStatus"
+							/>
+						</items>
+					</IconTabBar>
+				</VBox>
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
-			<VBox>
-				<SearchField/>
 				<Table
 					id="receiptsTable"
 					items="{oViewMaster>/ReceiptsCollection}"
-					popinLayout="GridSmall">
+					popinLayout="GridSmall"
+					sticky="HeaderToolbar"
+					mode="MultiSelect"
+				>
 					<headerToolbar>
 						<OverflowToolbar>
-							<SegmentedButton>
+							<SegmentedButton
+								id="segBtmChangeReceiptListMode"
+								selectionChange="onChangeReceiptListMode"
+							>
 								<items>
 									<SegmentedButtonItem
+										id="btnSelctAll"
 										key="srcAll"
-										text="All(?)"/>
+										text="{i18n>materViewSegmentedButtonAll}({oViewMaster>/receiptListCount})"
+									/>
 									<SegmentedButtonItem
+										id="btnSelctToReview"
 										key="toReview"
-										text="To Review(?)"/>
+										text="{i18n>materViewSegmentedButtonToReview}({oViewMaster>/receiptListToReviewCount})"
+									/>
 								</items>
 							</SegmentedButton>
 							<ToolbarSpacer/>
+							<!-- Add the Reload button -->
+							<Button
+								icon="sap-icon://refresh"
+								press="onReLoadList"
+							>
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</Button>
 							<!-- Add the Delete button -->
-							<Button icon="sap-icon://delete">
+							<Button
+								icon="sap-icon://delete"
+								press="onDeleteList"
+							>
 								<layoutData>
 									<OverflowToolbarLayoutData priority="NeverOverflow"/>
 								</layoutData>
 							</Button>
 							<ToolbarSeparator/>
 							<!-- Add the Sort button -->
-							<Button icon="sap-icon://sort-ascending">
+							<Button
+								icon="{= ${oViewMaster>/sortByDateA}?'sap-icon://sort-ascending':'sap-icon://sort-descending'}"
+								press="onSortByDate"
+							>
 								<layoutData>
 									<OverflowToolbarLayoutData priority="NeverOverflow"/>
 								</layoutData>
 							</Button>
 							<!-- Add the Filter button -->
-							<Button icon="sap-icon://filter">
+							<Button
+								icon="sap-icon://filter"
+								press="onOpenFilterReciptsDialog"
+							>
 								<layoutData>
 									<OverflowToolbarLayoutData priority="NeverOverflow"/>
 								</layoutData>
@@ -62,81 +126,127 @@
 					</headerToolbar>
 					<columns>
 						<Column>
-							<Text text="Receipt title"/>
+							<Text text="{i18n>masterViewColumnReceiptTitle}"/>
+							<customData>
+							</customData>
 						</Column>
 						<Column>
-							<Text text="Amount"/>
+							<Text text="{i18n>masterViewColumnAmount}"/>
 						</Column>
 						<Column
 							demandPopin="true"
 							minScreenWidth="Desktop"
-							popinDisplay="Inline">
-							<Text text="Expense Type"/>
+							popinDisplay="Inline"
+						>
+							<Text text="{i18n>masterViewColumnExpenseType}"/>
 						</Column>
 						<Column
 							demandPopin="true"
 							minScreenWidth="Desktop"
-							popinDisplay="Inline">
-							<Text text="Location"/>
+							popinDisplay="Inline"
+						>
+							<Text text="{i18n>masterViewColumnLocation}"/>
 						</Column>
 						<Column
 							demandPopin="true"
 							minScreenWidth="Desktop"
-							popinDisplay="Inline">
-							<Text text="Document"/>
+							popinDisplay="Inline"
+						>
+							<Text text="{i18n>masterViewColumnDocument}"/>
 						</Column>
 						<Column
 							demandPopin="true"
 							minScreenWidth="Desktop"
-							popinDisplay="Inline">
-							<Text text="Expense Date"/>
+							popinDisplay="Inline"
+						>
+							<Text text="{i18n>masterViewColumnExpenseDate}"/>
 						</Column>
 						<Column
 							demandPopin="true"
 							minScreenWidth="Desktop"
-							popinDisplay="Inline">
-							<Text text="OCR Status"/>
+							popinDisplay="Inline"
+						>
+							<Text text="{i18n>masterViewColumnOCRStatus}"/>
 						</Column>
 						<Column
 							demandPopin="true"
 							minScreenWidth="Desktop"
-							popinDisplay="Inline">
-							<Text text="Archiving status"/>
+							popinDisplay="Inline"
+						>
+							<Text text="{i18n>masterViewColumnArchivingStatus}"/>
 						</Column>
 						<Column
 							demandPopin="true"
 							minScreenWidth="Desktop"
-							popinDisplay="Inline">
-							<Text text="Review status"/>
+							popinDisplay="Inline"
+						>
+							<Text text="{i18n>masterViewColumnReviewStatus}"/>
 						</Column>
 					</columns>
 					<items>
 						<ColumnListItem
-							highlight="{
-								path: 'receipts>reviewStatus',
-								formatter: '.formatter.formatStatusReceipts'
-							}"
+							highlight="{= ${oViewMaster>IsReviewed} ? 'Success' : 'Warning' }"
 							type="Navigation"
-							press="onPressNextRout">
+							press="onPressNextRout"
+						>
 							<cells>
-								<Title text="{receipts>receiptTitle}"/>
-								<Title text="{
-									path: 'receipts>amount',
-									formatter: '.formatter.formatFloatString'
-								} {receipts>currency}"/>
-								<Text text="{receipts>expenseType}"/>
-								<Text text="{receipts>location}"/>
-								<Link text="{receipts>documentLink}"/>
-								<Text text="{receipts>expenseDate}"/>
+								<Title text="{oViewMaster>MerchantName}"/>
+								<Title text="{oViewMaster>Amount} {oViewMaster>Currency}"/>
+								<Text text="{oViewMaster>Category}"/>
+								<Text text="{
+									parts: ['oViewMaster>MerchantCountryLong', 'oViewMaster>MerchantCity'],
+									formatter: '.formatter.formatAdress'
+								}"/>
+								<Link
+									text="{oViewMaster>Type}"
+									press="onNavAttachment"
+								/>
+								<Text text="{
+										parts: [ 'oViewMaster>InvoiceDate' ],
+										formatter: '.formatter.formatDate'}"/> 
+								<!-- <Text text="{oViewMaster>InvoiceDate}"/>  -->
 								<ObjectStatus
-									text="{receipts>ocrStatus}"
-									state="Success"/>
+									text="{
+										parts: ['oViewMaster>FileExternalId', 'oViewMaster>/isOCRStatus', 'oViewMaster>ErrorType'],
+										formatter: '.formatter.formatStatusText'
+									}"
+									icon="{
+										parts: ['oViewMaster>FileExternalId', 'oViewMaster>/isOCRStatus', 'oViewMaster>ErrorType'],
+										formatter: '.formatter.formatIconStatus'
+									}"
+									state="{
+										parts: ['oViewMaster>FileExternalId', 'oViewMaster>/isOCRStatus', 'oViewMaster>ErrorType'],
+										formatter: '.formatter.formatStatus'
+									}"
+								/>
 								<ObjectStatus
-									text="{receipts>archivingStatus}"
-									state="Success"/>
+									text="{
+										parts: ['oViewMaster>IsArchived', 'oViewMaster>/isArchStatus'],
+										formatter: '.formatter.formatStatusText'
+									}"
+									icon="{
+										parts: ['oViewMaster>IsArchived', 'oViewMaster>/isArchStatus'],
+										formatter: '.formatter.formatIconStatus'
+									}"
+									state="{
+										parts: ['oViewMaster>IsArchived', 'oViewMaster>/isArchStatus'],
+										formatter: '.formatter.formatStatus'
+									}"
+								/>
 								<ObjectStatus
-									text="{receipts>reviewStatus}"
-									state="Warning"/>
+									text="{
+										parts: ['oViewMaster>IsReviewed', 'oViewMaster>/isReviewStatus'],
+										formatter: '.formatter.formatStatusText'
+									}"
+									icon="{
+										parts: ['oViewMaster>IsReviewed', 'oViewMaster>/isReviewStatus'],
+										formatter: '.formatter.formatIconStatus'
+									}"
+									state="{
+										parts: ['oViewMaster>IsReviewed', 'oViewMaster>/isReviewStatus'],
+										formatter: '.formatter.formatStatus'
+									}"
+								/>
 							</cells>
 						</ColumnListItem>
 					</items>
@@ -146,32 +256,32 @@
 							illustrationSize="Scene"
 							illustrationType="sapIllus-NoData"
 							enableDefaultTitleAndDescription="false"
-							title="There's no digital receipts"
-							description="Start to digitalise a receipt.">
-						</IllustratedMessage>
+							title="{i18n>masterViewNoDataTitle}"
+							description="{i18n>masterViewNoDataDescription}"
+						/>
 					</noData>
 				</Table>
-			</VBox>
 		</f:content>
 		<f:footer>
-			<Toolbar
-				asyncMode="false"
-				design="Transparent">
+			<OverflowToolbar design="Transparent">
 				<ToolbarSpacer/>
 				<u:FileUploader
 					id="fileUploaderPhoto"
-					buttonText="Digitalise Receipts"
-					uploadUrl="upload/"
+					buttonText="{i18n>masterViewButtonDigitaliseReceipts}"
+					uploadUrl="/sap/opu/odata/sap/ZSRFI_DGT_RCPT_SRV/ReceiptAttachments"
 					buttonOnly="true"
 					uploadComplete="handleUploadComplete"
 					style="Emphasized"
 					change="onSelecFile"
-					sameFilenameAllowed="true"/>
+					sameFilenameAllowed="true"
+					fileType="pdf,jpg,jpeg,bmp,gif,png"
+				/>
 				<Button
-					text="Create Expense"
+					text="{i18n>masterViewButtonCreateExpense}"
 					type="Transparent"
-					visible="false"/>
-			</Toolbar>
+					press="onCreateExpense"
+				/>
+			</OverflowToolbar>
 		</f:footer>
 	</f:DynamicPage>
 </mvc:View>

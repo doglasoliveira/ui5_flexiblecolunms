@@ -1,0 +1,18 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core">      
+	<SearchField
+		id="srchArStatusFilterList"
+		search="onSearchFilterList"
+		visible="{= ${oViewMaster>/filterByContext} === 'kFilterArchStatus'?true:false}"/>
+	<List
+		id="listFilterArStatus"
+		items="{oViewMaster>/listFilterArStatus}"
+		selectionChange="onSelectArStatusFilter"
+		visible="{= ${oViewMaster>/filterByContext} === 'kFilterArchStatus'?true:false}"
+		mode="MultiSelect">
+		<StandardListItem
+			id="arStatusItemListId"
+			title="{oViewMaster>arStatus}"/>
+	</List>
+</c:FragmentDefinition>

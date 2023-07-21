@@ -6,8 +6,7 @@
 >
 	<FlexibleColumnLayout
 		id="flexibleColumnLayout"
-		stateChange=".onStateChanged"
-		backgroundDesign="Solid"
-		layout="{receipts>/layout}"
+		backgroundDesign="Translucent"
+		layout="{global>/layout}"
 	/>
 </mvc:View>

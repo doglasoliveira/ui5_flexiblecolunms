@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog stretch="true">
+		<OverflowToolbar>
+			<Button
+				type="Back"
+				press="onNavBackFilterReciptsDialog"/>
+			<Title text="{i18n>dialogFilterTitle} {oViewMaster>/filterByTileText}"/>
+			<ToolbarSpacer/>
+			<Button text="{i18n>dialogFilterReset}" press="onResetSelectionFilters"/>
+		</OverflowToolbar>
+		<core:Fragment
+			fragmentName="com.vesi.zfafidgtrcpt.view.fragment.filtersBy.filterList"
+			type="XML"/>
+		<core:Fragment
+			fragmentName="com.vesi.zfafidgtrcpt.view.fragment.filtersBy.filterListMonths"
+			type="XML"/>
+		<core:Fragment
+			fragmentName="com.vesi.zfafidgtrcpt.view.fragment.filtersBy.filterListExpTypes"
+			type="XML"/>
+		<core:Fragment
+			fragmentName="com.vesi.zfafidgtrcpt.view.fragment.filtersBy.filterListAmount"
+			type="XML"/>
+		<core:Fragment
+			fragmentName="com.vesi.zfafidgtrcpt.view.fragment.filtersBy.filterListArStatus"
+			type="XML"/>
+		<beginButton>
+			<Button
+				text="{i18n>dialogFilterButtonOK}"
+				type="Emphasized"
+				press="onConfirmFilterReceiptsDialog"/>
+		</beginButton>
+		<endButton>
+			<Button
+				text="{i18n>dialogFilterButtonCancel}"
+				press="onCloseFilterReceiptsDialog(this, $event)"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

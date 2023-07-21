@@ -2,21 +2,40 @@
 	controllerName="com.vesi.zfafidgtrcpt.controller.Deepdetail"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
-	xmlns:f="sap.f"
->
-	<f:DynamicPage >
+	xmlns:f="sap.f">
+	<f:DynamicPage>
 		<f:header>
 			<f:DynamicPageHeader pinnable="false">
-			<Toolbar style="Clear">
-				<Title text="Attachment"/>
-				<ToolbarSpacer/>
-				<Button icon="sap-icon://full-screen"/>
-				<Button icon="sap-icon://decline"/>
-			</Toolbar>
+				<Toolbar style="Clear">
+					<Title text="{i18n>deepDetailViewTitle}"/>
+					<ToolbarSpacer/>
+					<Button
+						icon="sap-icon://full-screen"
+						press="onFullResize('EndColumnFullScreen')"
+						visible="{= ${oDeepDetailModel>/bVisibleScreMode}}"/>
+					<Button
+						icon="sap-icon://exit-full-screen"
+						press="onFullResize('ThreeColumnsMidExpanded')"
+						visible="{= !${oDeepDetailModel>/bVisibleScreMode}}"/>
+					<Button
+						icon="sap-icon://decline"
+						press="onExitAttachResize('ThreeColumnsMidExpandedEndHidden')"/>
+				</Toolbar>
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
-			<Image src="../../../mockdata/attach_receipt.png"/>
+			<PDFViewer
+				id="receiptPDFViewer"
+				source=""
+				title="{global>/ReceiptFileName}"
+				height="100%"
+				showDownloadButton="false"
+				displayType="Embedded"
+				>
+				<layoutData>
+					<FlexItemData growFactor="1"/>
+				</layoutData>
+			</PDFViewer>
 		</f:content>
 	</f:DynamicPage>
 </mvc:View>

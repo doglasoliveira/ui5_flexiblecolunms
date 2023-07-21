@@ -14,6 +14,15 @@
       "id": "@sap/generator-fiori:basic",
       "version": "1.9.3",
       "toolsId": "7627ebee-013e-4ec4-8454-be51bd7a93c9"
+    },
+    "dataSources": {
+      "ZSRFI_DGT_RCPT_SRV": {
+        "uri": "/sap/opu/odata/sap/ZSRFI_DGT_RCPT_SRV/",
+        "type": "OData",
+        "settings": {
+          "localUri": "localService/metadata.xml"
+        }
+      }
     }
   },
   "sap.ui": {
@@ -58,6 +67,17 @@
         "settings": {
           "bundleName": "com.vesi.zfafidgtrcpt.i18n.i18n"
         }
+      },
+      "": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Request",
+          "useBatch": true
+        },
+        "dataSource": "ZSRFI_DGT_RCPT_SRV",
+        "preload": true
       }
     },
     "resources": {
@@ -71,7 +91,7 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
-        "type":"View",
+        "type": "View",
         "async": true,
         "viewPath": "com.vesi.zfafidgtrcpt.view",
         "controlId": "flexibleColumnLayout",
@@ -80,35 +100,32 @@
       "routes": [
         {
           "name": "master",
-          "pattern": ":layout:",
+          "pattern": "",
+          "target": "master"
+        },
+        {
+          "pattern": "detail/{itemNumber}/{receiptId}/",
+          "name": "detail",
           "target": [
             "master",
             "detail"
           ]
         },
-				{
-					"pattern": "detail/{receiptId}/{layout}",
-					"name": "detail",
-					"target": [
-						"master",
-						"detail"
-					]
-				},
-				{
-					"pattern": "detail/{receiptId}/deepdetail/{layout}",
-					"name": "deepdetail",
-					"target": [
-						"master",
-						"detail",
+        {
+          "pattern": "detail/{itemNumber}/{receiptId}/deepdetail",
+          "name": "deepdetail",
+          "target": [
+            "master",
+            "detail",
             "deepdetail"
-					]
-				},
-				{
-					"pattern": "receiptConfig/{layout}",
-					"name": "receiptConfig",
-					"target": "receiptConfig",
-					"layout": "EndColumnFullScreen"
-				}
+          ]
+        },
+        {
+          "pattern": "receiptConfig",
+          "name": "receiptConfig",
+          "target": "receiptConfig",
+          "layout": "EndColumnFullScreen"
+        }
       ],
       "targets": {
         "master": {

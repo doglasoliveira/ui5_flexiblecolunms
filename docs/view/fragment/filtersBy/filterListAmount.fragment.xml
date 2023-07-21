@@ -1,0 +1,18 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core">      
+	<SearchField
+		id="srchAmountFilterList"
+		search="onSearchFilterList"
+		visible="{= ${oViewMaster>/filterByContext} === 'kFilterAmount'?true:false}"/>
+	<List
+		id="listFilterAmount"
+		items="{oViewMaster>/listFilterAmount}"
+		selectionChange="onSelectAmountFilter"
+		visible="{= ${oViewMaster>/filterByContext} === 'kFilterAmount'?true:false}"
+		mode="SingleSelectLeft">
+		<StandardListItem
+			id="amountItemListId"
+			title="{oViewMaster>amount}"/>
+	</List>
+</c:FragmentDefinition>

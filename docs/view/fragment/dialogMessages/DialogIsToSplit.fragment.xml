@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Dialog icon="sap-icon://alert" state="Information" title="{i18n>dialogInformationTitle}">
+		<VBox class="sapUiResponsiveMargin">
+			<HBox>
+				<FormattedText
+				htmlText="{oReceiptConfigView>/reciptConfigIsToSplitMessage}">
+				</FormattedText>
+			</HBox>
+		</VBox>
+		<buttons>
+			<Button
+				text="{i18n>dialogIsToSplitButtonOneReceipt}"
+				type="Emphasized"
+				press="onChoseToSplit(false)"
+			/>
+			<Button
+				text="{i18n>dialogIsToSplitButtonMultiReceipts}"
+				type="Emphasized"
+				press="onChoseToSplit(true)"
+			/>
+			<Button
+				text="{i18n>dialogIsToSplitButtonCancel}"
+				press="onCloseToSplit"
+			/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

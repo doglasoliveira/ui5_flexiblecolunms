@@ -1,0 +1,18 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core">      
+	<SearchField
+		id="srchExpTypesFilterList"
+		search="onSearchFilterList"
+		visible="{= ${oViewMaster>/filterByContext} === 'kFilterExType'?true:false}"/>
+	<List
+		id="listFilterExpTypes"
+		items="{global>/ExpenseTypes}"
+		selectionChange="onSelectExpTypesFilter"
+		visible="{= ${oViewMaster>/filterByContext} === 'kFilterExType'?true:false}"
+		mode="MultiSelect">
+		<StandardListItem
+			id="expTypesItemListId"
+			title="{global>Description}"/>
+	</List>
+</c:FragmentDefinition>

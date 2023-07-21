@@ -1,20 +1,39 @@
 <mvc:View
-	controllerName="com.vesi.zfafidgtrcpt.controller.Detail"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:f="sap.f"
-	xmlns:form="sap.ui.layout.form"
-	xmlns:core="sap.ui.core">
+    controllerName="com.vesi.zfafidgtrcpt.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+>
 	<f:DynamicPage showFooter="true">
 		<f:header>
 			<f:DynamicPageHeader pinnable="false">
 				<Toolbar style="Clear">
 					<Title
-						text="Informations Validation"
-						titleStyle="H5"/>
+						text="{i18n>detailViewTitleInformationsValidation}"
+						titleStyle="H5"
+					/>
 					<ToolbarSpacer/>
-					<Button text="Delete" type="Reject"/>
+					<Button
+						text="{i18n>detailViewButtonDelete}"
+						type="Reject"
+						press="onDeleteReceipt"
+					/>
 				</Toolbar>
+				<Toolbar
+					style="Clear"
+					visible="{= ${global>/subHeaderDetailShow}?true:false}"
+				>
+				</Toolbar>
+                <MessageStrip
+                    text="{oDetailModel>/receiptDetail/ErrorMessage}"
+                    type="Error"
+                    showIcon="true"
+                    showCloseButton="false"
+					visible="{= ${oDetailModel>/receiptDetail/ErrorMessage}?true:false}"
+                />
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
@@ -34,53 +53,80 @@
 				columnsXL="2"
 				columnsL="2"
 				columnsM="1"
-				singleContainerFullSize="false">
+				singleContainerFullSize="false"
+			>
 				<form:content>
 					<core:Title text=""/>
-					<Label text="Exepense type"/>
+					<Label text="{i18n>detailViewFormLabelExpenseType}"/>
 					<Select
 						id="exptyp"
-						selectedKey="{Country}">
+						selectedKey="{oDetailModel>/receiptDetail/CategoryId}"
+						items="{oDetailModel>/ExpenseTypes}"
+					>
 						<items>
 							<core:Item
-								text="Indicivual Transport"
-								key="IndTrans"/>
+								text="{oDetailModel>Description}"
+								key="{oDetailModel>Expensetypeid}"
+							/>
 						</items>
 					</Select>
-					<core:Title text="Main Informations"/>
-					<Label text="Receipts Title"/>
+					<core:Title text="{i18n>detailViewFormGroupTitleMainInformations}"/>
+					<Label text="{i18n>detailViewFormLabelReceiptsTitle}"/>
 					<Input
-						value=""
-						type="Url"/>
-					<Label text="Amount"/>
-					<Input value="{Twitter}"/>
-					<Label text="Currency"/>
-					<Input value="{Twitter}"/>
-					<Label text="Expense Date"/>
-					<Input value="{Twitter}"/>
-					<Label text="Location"/>
-					<Input value="{Twitter}"/>
-					<core:Title text="Aditional Informations"/>
-					<Label text="Business Purpose"/>
-					<Input value="{Twitter}"/>
-					<Label text="Description"/>
-					<Input value="{Twitter}"/>
+						value="{oDetailModel>/receiptDetail/MerchantName}"
+						type="Url"
+					/>
+					<Label text="{i18n>detailViewFormLabelAmount}"/>
+					<Input value="{oDetailModel>/receiptDetail/Amount}"/>
+					<Label text="{i18n>detailViewFormLabelCurrency}"/>
+					<Input value="{oDetailModel>/receiptDetail/Currency}"/>
+					<Label text="{i18n>detailViewFormLabelExpenseDate}"/>
+					<Input value="{oDetailModel>/receiptDetail/InvoiceDate}"/>
+					<core:Title text="{i18n>detailViewFormGroupTitleLocation}"/>
+					<Label text="{i18n>detailViewFormLabelCountry}"/>
+					<Input value="{oDetailModel>/receiptDetail/MerchantCountryLong}"/>
+					<Label text="{i18n>detailViewFormLabelCity}"/>
+					<Input value="{oDetailModel>/receiptDetail/MerchantCity}"/>
+					<Label text="{i18n>detailViewFormLabelZIPCode}"/>
+					<Input value="{oDetailModel>/receiptDetail/MerchantZipcode}"/>
+					<Label text="{i18n>detailViewFormLabelAddress}"/>
+					<Input value="{oDetailModel>/receiptDetail/MerchantAddress}"/>
+					<core:Title text="{i18n>detailViewFormGroupTitleAditionalInformations}"/>
+					<Label text="{i18n>detailViewFormLabelBusinessPurpose}"/>
+					<Input value="{oDetailModel>/receiptDetail/BusinessPurpose}"/>
+					<Label text="{i18n>detailViewFormLabelDescription}"/>
+					<Input value="{oDetailModel>/receiptDetail/Description}"/>
+					<Label text="{i18n>detailViewFormLabelComment}"/>
+					<Input value="{oDetailModel>/receiptDetail/Comment}"/>
 				</form:content>
 			</form:SimpleForm>
 		</f:content>
 		<f:footer>
-			<Toolbar
-				asyncMode="false"
-				design="Transparent">
+			<OverflowToolbar design="Transparent">
 				<ToolbarSpacer/>
 				<Button
-					text="Save"
+					text="{i18n>detailViewButtonValidateContinue}"
 					type="Accept"
-					press="onNavToAttach"/>
+					press="onValidateReceipt"
+					visible="{= ${global>/buttonValidateSaveShow}?true:false}"
+				/>
 				<Button
-					text="Close Attachment"
-					type="Reject"/>
-			</Toolbar>
+					text="{i18n>detailViewButtonSaveClose}"
+					type="Accept"
+					press="onSaveReceipt"
+					visible="{= ${global>/buttonValidateSaveShow}?false:true}"
+				/>
+				<Button
+					text="{i18n>detailViewButtonViewAttachment}"
+					type="Emphasized"
+					press="onNavToAttach"
+				/>
+				<Button
+					text="{i18n>detailViewButtonCancel}"
+					type="Transparent"
+					press="onBackToReceiptList"
+				/>
+			</OverflowToolbar>
 		</f:footer>
 	</f:DynamicPage>
 </mvc:View>

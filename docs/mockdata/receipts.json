@@ -6,8 +6,8 @@
             "receiptTitle": "Hanita Sushi",
             "amount": 93.30,
             "currency": "EUR",
-            "expenseDate": "09.02.2023",
-            "location": "12 rue Belmont 75012",
+            "expenseDate": "13.01.2023",
+            "location": "1200 rue DuFort 75012",
             "numberEmployees": "3",
             "businessPurpose": "",
             "description": "",
@@ -39,8 +39,8 @@
             "receiptTitle": "Taxi",
             "amount": 1200.67,
             "currency": "EUR",
-            "expenseDate": "09.02.2023",
-            "location": "12 rue Belmont 75012",
+            "expenseDate": "22.03.2023",
+            "location": "123 rue Porto 90558",
             "numberEmployees": "3",
             "businessPurpose": "",
             "description": "",
@@ -51,5 +51,5 @@
             "reviewStatus": "To Review"
         }
     ],
-    "layout": "OneColumn"
+    "layout": "ThreeColumnsMidExpanded"
 }

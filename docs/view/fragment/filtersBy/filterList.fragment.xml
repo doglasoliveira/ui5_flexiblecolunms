@@ -1,0 +1,15 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core">
+	<List
+		id="listFilterTypes"
+		items="{oViewMaster>/listFiltersReceipts}"
+		visible="{= ${oViewMaster>/filterByContext} === 'kNGroup'?true:false}"
+		selectionChange="onNavToDetailFilterTypes"
+		mode="SingleSelectMaster">
+		<StandardListItem
+			title="{oViewMaster>filterField}"
+			counter="{oViewMaster>qtdSelected}"
+			press="onNavToDetailFilterTypes"/>
+	</List>
+</c:FragmentDefinition>

@@ -4,17 +4,49 @@ sap.ui.define(function () {
     return {
 
         formatStatusReceipts: function (sStatus) {
-            switch (sStatus) {
-                case 'To Review':
-                    return 'Warning'
-                    break;
-                case 'Review OK':
-                    return 'Success'
-                    break;
-                default:
-                    return 'None'
-                    break;
+            return sStatus ? 'Success' : 'Warning';
+        },
+
+        formatStatusText: function (svalue, sId, sErrorType) {
+            let sTextTrue = sId === "OCRStatus" ? "Extracted" : sId === "ArchStatus" ? "Archived" : sId === "ReviewStatus" ? "Validated" : false;
+            let sTextFalse = sId === "ReviewStatus" ? "To review" : "Pending";
+            if (sErrorType) {
+                return 'Error'
             }
+            if (svalue) {
+                return sTextTrue;
+            }
+            return sTextFalse
+
+        },
+
+        formatStatus: function (svalue, sId, sErrorType) {
+            if (sErrorType) {
+                return 'Error';
+            }
+            let sStatus = sId === "OCRStatus" ? 'Information' : 'Warning';
+            if (svalue) {
+                return 'Success';
+            }
+            return sStatus
+        },
+
+        formatIconStatus: function (svalue, sId, sErrorType) {
+            if (sErrorType) {
+                return 'sap-icon://error';
+            }
+            let sIconFalse = sId === "OCRStatus" ? "sap-icon://information" : "sap-icon://warning";
+            if (svalue) {
+                return 'sap-icon://message-success';
+            }
+            return sIconFalse;
+        },
+
+        formatAdress: function(pCountry, pCity){
+            let sCountry = pCountry !== "" ? `${pCountry}, `:"";
+            let sCity = pCity !== "" ? `${pCity}`:"";
+            
+            return `${sCountry}${sCity}`;
         },
 
         formatTotalAmountReceipts: function () {
@@ -34,7 +66,20 @@ sap.ui.define(function () {
         },
 
         formatFloatString: function (sValue) {
-            return sValue.toFixed(2)
+            if (sValue) {
+                return sValue.toFixed(2)
+            }
+
+        },
+
+        formatURLFile: function(sFileId, sArchId){
+            if (sFileId && sArchId) {
+                return `/sap/opu/odata/sap/ZSRFI_DGT_RCPT_SRV/ReceiptAttachments(ArchiveId='${sArchId}',FileInternalId=guid'${sFileId}')/$value`
+            }
+        },
+
+        formatDate: function(sValue){
+            return sValue === '0000-00-00' ? '' : sValue;
         }
     };
 });
